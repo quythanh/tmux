@@ -12,15 +12,12 @@
 </p>
 
 <p align="center">
-  <img src="./assets/preview.webp"/>
+  <img src="./assets/frappe.webp"/>
 </p>
 
 ## Themes
 
-- 🌻 [Latte](./catppuccin-latte.tmuxtheme)
-- 🪴 [Frappé](./catppuccin-frappe.tmuxtheme)
-- 🌺 [Macchiato](./catppuccin-macchiato.tmuxtheme)
-- 🌿 [Mocha](./catppuccin-mocha.tmuxtheme)
+- 🪴 [Frappé](./themes/frappe.tmuxtheme)
 
 ## Usage
 
@@ -30,17 +27,10 @@
 2. Add the Catppuccin plugin:
 
 ```bash
-set -g @plugin 'catppuccin/tmux'
+set -g @plugin 'quythanh/tmux'
 # ...alongside
 set -g @plugin 'tmux-plugins/tpm'
 ```
-
-3. (Optional) Set your preferred flavour, it defaults to `"mocha"`:
-
-```bash
-set -g @catppuccin_flavour 'latte' # or frappe, macchiato, mocha
-```
-
 ### Manual
 
 1. Copy your desired theme's configuration contents into your Tmux config (usually stored at `~/.tmux.conf`)
