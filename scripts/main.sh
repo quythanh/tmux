@@ -41,6 +41,7 @@ main() {
   local user="$(get_tmux_option "@catppuccin_user" "off")"
   local host="$(get_tmux_option "@catppuccin_host" "off")"
   local date_time="$(get_tmux_option "@catppuccin_date_time" "off")"
+  local cpu="$(get_tmux_option "@catppuccin_cpu" "on")"
 
   # These variables are the defaults so that the setw and set calls are easier to parse.
   local show_directory="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
@@ -53,13 +54,13 @@ main() {
   local show_user="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] #(whoami) "
   local show_host="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue]󰒋 #[fg=$thm_fg,bg=$thm_gray] #H "
   local show_date_time="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] $date_time "
-  local show_cpu="#[fg=$thm_yellow,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_yellow,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #($current_dir/cpu.sh)"
+  local show_cpu="#[fg=$thm_yellow,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_yellow,nobold,nounderscore,noitalics]CPU #[fg=$thm_fg,bg=$thm_gray] #($current_dir/cpu.sh) "
 
   # Right column 1 by default shows the Window name.
   local right_column1=$show_window
 
   # Right column 2 by default shows the current Session name.
-  local right_column2=$show_session$show_cpu
+  local right_column2=$show_session
 
   # Window status by default shows the current directory basename.
   local window_status_format=$show_directory_in_window_status
@@ -71,6 +72,10 @@ main() {
     right_column1=$show_directory
     window_status_format=$show_window_in_window_status
     window_status_current_format=$show_window_in_window_status_current
+  fi
+
+  if [[ "${cpu}" == "on" ]]; then
+    right_column2=$right_column2$show_cpu
   fi
 
   if [[ "${user}" == "on" ]]; then
@@ -100,4 +105,4 @@ main() {
   tmux "${tmux_commands[@]}"
 }
 
-main
+main "$@"
